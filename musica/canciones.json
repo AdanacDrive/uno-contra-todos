@@ -1,0 +1,74 @@
+[
+  {
+    "titulo": "No Frills Cumbia",
+    "artista": "Kevin MacLeod (incompetech.com)",
+    "archivo": "musica/no-frills-cumbia.mp3",
+    "licencia": "CC BY 4.0",
+    "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "fuente": "https://incompetech.com/music/royalty-free/"
+  },
+  {
+    "titulo": "No Frills Salsa",
+    "artista": "Kevin MacLeod (incompetech.com)",
+    "archivo": "musica/no-frills-salsa.mp3",
+    "licencia": "CC BY 4.0",
+    "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "fuente": "https://incompetech.com/music/royalty-free/"
+  },
+  {
+    "titulo": "Wepa",
+    "artista": "Kevin MacLeod (incompetech.com)",
+    "archivo": "musica/wepa.mp3",
+    "licencia": "CC BY 4.0",
+    "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "fuente": "https://incompetech.com/music/royalty-free/"
+  },
+  {
+    "titulo": "Electro Cabello",
+    "artista": "Kevin MacLeod (incompetech.com)",
+    "archivo": "musica/electro-cabello.mp3",
+    "licencia": "CC BY 4.0",
+    "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "fuente": "https://incompetech.com/music/royalty-free/"
+  },
+  {
+    "titulo": "Peppy Pepe",
+    "artista": "Kevin MacLeod (incompetech.com)",
+    "archivo": "musica/peppy-pepe.mp3",
+    "licencia": "CC BY 4.0",
+    "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "fuente": "https://incompetech.com/music/royalty-free/"
+  },
+  {
+    "titulo": "Blobby Samba",
+    "artista": "Kevin MacLeod (incompetech.com)",
+    "archivo": "musica/blobby-samba.mp3",
+    "licencia": "CC BY 4.0",
+    "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "fuente": "https://incompetech.com/music/royalty-free/"
+  },
+  {
+    "titulo": "Paradise Found",
+    "artista": "Kevin MacLeod (incompetech.com)",
+    "archivo": "musica/paradise-found.mp3",
+    "licencia": "CC BY 4.0",
+    "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "fuente": "https://incompetech.com/music/royalty-free/"
+  },
+  {
+    "titulo": "Lagoa v1",
+    "artista": "Kevin MacLeod (incompetech.com)",
+    "archivo": "musica/lagoa.mp3",
+    "licencia": "CC BY 4.0",
+    "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "fuente": "https://incompetech.com/music/royalty-free/"
+  },
+  {
+    "titulo": "New Friendly",
+    "artista": "Kevin MacLeod (incompetech.com)",
+    "archivo": "musica/new-friendly.mp3",
+    "licencia": "CC BY 4.0",
+    "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "fuente": "https://incompetech.com/music/royalty-free/"
+  }
+]
