@@ -23,7 +23,7 @@ Physical game: number cards, a soft squishy ball, rounds of 3 songs, winner has 
 
 ## Capabilities and Constraints
 - One phone, no accounts, no player names, no card counting.
-- Bundled music: Kevin MacLeod (incompetech.com), CC BY 4.0; credits page required.
+- Bundled music: 12 reggaetón and cumbia tracks from Pixabay (Pixabay Content License); credits page lists each author.
 - Optional: load your own songs from the phone (never uploaded).
 
 ## Brand Commitments
