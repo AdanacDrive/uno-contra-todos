@@ -14,6 +14,7 @@
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <symbol id="i-dado" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="8.5" cy="8.5" r="1.6" fill="currentColor"/><circle cx="15.5" cy="15.5" r="1.6" fill="currentColor"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/></symbol>
     <symbol id="i-nota" viewBox="0 0 24 24"><path d="M9 18V5l11-2v13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.5" cy="18" r="2.8" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="17.5" cy="16" r="2.8" fill="none" stroke="currentColor" stroke-width="2.2"/></symbol>
+    <symbol id="i-ondas" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M7.5 9.5c3-1 6.5-.7 9 .8M8 12.8c2.4-.7 5.2-.4 7.2.7M8.6 15.8c1.9-.5 3.9-.3 5.5.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
     <symbol id="i-flecha" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   </svg>
 
@@ -21,10 +22,14 @@
     <!-- Inicio -->
     <section class="pantalla pantalla-inicio" data-pantalla="inicio">
       <h1 class="rotulo"><span>UNO</span><span>contra</span><span>todos</span></h1>
-      <p class="indicacion">Pongan el celular en el centro de la mesa y suban el volumen.</p>
+      <p class="indicacion" id="txt-inicio">Pongan el celular en el centro de la mesa y suban el volumen.</p>
       <button class="boton boton-grande" id="btn-empezar" type="button" disabled>Cargando música…</button>
       <div class="pie">
-        <label class="enlace" for="archivos">
+        <button class="enlace enlace-boton" id="btn-spotify" type="button">
+          <svg class="icono"><use href="#i-ondas"/></svg>
+          <span id="txt-spotify">Usar mi Spotify (Premium)</span>
+        </button>
+        <label class="enlace" for="archivos" id="lbl-archivos">
           <svg class="icono"><use href="#i-nota"/></svg>
           <span id="txt-mis-canciones">Usar mis canciones</span>
         </label>
@@ -68,7 +73,7 @@
     <section class="pantalla pantalla-detenido" data-pantalla="detenido" aria-live="assertive">
       <svg class="icono-grande"><use href="#i-nota"/></svg>
       <h2 class="rotulo-mediano">La música se detuvo</h2>
-      <p class="indicacion">El celular la pausó. Toquen para seguir donde iban.</p>
+      <p class="indicacion" id="txt-detenido">El celular la pausó. Toquen para seguir donde iban.</p>
       <button class="boton boton-grande" id="btn-seguir" type="button">Seguir la música</button>
     </section>
 

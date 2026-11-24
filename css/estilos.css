@@ -133,6 +133,9 @@ body[data-estado="fin"] .pantalla-fin { display: flex; }
   border-radius: 6px;
 }
 
+.enlace-boton { background: none; border: 0; padding: 0; font-family: inherit; }
+.enlace[hidden] { display: none; }
+
 /* Sonando: barras que bailan */
 .pantalla-sonando { background: var(--morado); }
 .ecualizador { display: flex; align-items: flex-end; gap: 10px; height: 120px; margin: 8px 0 6px; }
