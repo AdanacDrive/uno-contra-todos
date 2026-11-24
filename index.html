@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#3b1f78">
+  <title>UNO contra todos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Figtree:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body data-estado="inicio">
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-dado" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="8.5" cy="8.5" r="1.6" fill="currentColor"/><circle cx="15.5" cy="15.5" r="1.6" fill="currentColor"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/></symbol>
+    <symbol id="i-nota" viewBox="0 0 24 24"><path d="M9 18V5l11-2v13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.5" cy="18" r="2.8" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="17.5" cy="16" r="2.8" fill="none" stroke="currentColor" stroke-width="2.2"/></symbol>
+    <symbol id="i-flecha" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </svg>
+
+  <main>
+    <!-- Inicio -->
+    <section class="pantalla pantalla-inicio" data-pantalla="inicio">
+      <h1 class="rotulo"><span>UNO</span><span>contra</span><span>todos</span></h1>
+      <p class="indicacion">Pongan el celular en el centro de la mesa y suban el volumen.</p>
+      <button class="boton boton-grande" id="btn-empezar" type="button">Empezar ronda</button>
+      <div class="pie">
+        <label class="enlace" for="archivos">
+          <svg class="icono"><use href="#i-nota"/></svg>
+          <span id="txt-mis-canciones">Usar mis canciones</span>
+        </label>
+        <input id="archivos" type="file" accept="audio/*" multiple hidden>
+        <a class="enlace" href="creditos.html">Créditos de la música</a>
+      </div>
+    </section>
+
+    <!-- Sonando -->
+    <section class="pantalla pantalla-sonando" data-pantalla="sonando">
+      <p class="contador" id="txt-cancion">Canción 1 de 3</p>
+      <div class="ecualizador" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+      <h2 class="rotulo-mediano">Sigan jugando</h2>
+      <p class="indicacion">Una carta por turno, hacia la derecha.</p>
+      <button class="boton boton-dado" id="btn-dado" type="button">
+        <svg class="icono"><use href="#i-dado"/></svg>
+        Salió Retroceder
+      </button>
+    </section>
+
+    <!-- Pausa -->
+    <section class="pantalla pantalla-pausa" data-pantalla="pausa" aria-live="assertive">
+      <svg class="squishy" viewBox="0 0 100 100" aria-hidden="true">
+        <circle cx="50" cy="54" r="38" fill="#ff6fa8"/>
+        <ellipse cx="50" cy="90" rx="30" ry="5" fill="#3b1f78" opacity=".18"/>
+        <ellipse cx="38" cy="40" rx="10" ry="7" fill="#ffd3e5" transform="rotate(-30 38 40)"/>
+      </svg>
+      <h2 class="rotulo-pausa">¡Se paró la música!</h2>
+      <p class="instruccion">Todos por el squishy</p>
+      <button class="boton boton-oscuro" id="btn-lanzaron" type="button">Ya lo lanzaron</button>
+    </section>
+
+    <!-- Ponchado -->
+    <section class="pantalla pantalla-ponchado" data-pantalla="ponchado" aria-live="assertive">
+      <svg class="icono-grande"><use href="#i-flecha"/></svg>
+      <h2 class="rotulo-mediano">Empieza el ponchado</h2>
+      <p class="indicacion">Quien recibió el golpe toma 5 cartas y arranca el turno.</p>
+    </section>
+
+    <!-- Dado -->
+    <section class="pantalla pantalla-dado" data-pantalla="dado" aria-live="assertive">
+      <p class="contador">Salió Retroceder</p>
+      <div class="dado" id="dado" data-valor="4" aria-hidden="true">
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      </div>
+      <h2 class="rotulo-mediano" id="txt-dado">Come 4 cartas</h2>
+      <p class="indicacion">Le toca al jugador de la izquierda de quien tiró Retroceder.</p>
+      <button class="boton boton-claro" id="btn-cerrar-dado" type="button">Seguir</button>
+    </section>
+
+    <!-- Fin -->
+    <section class="pantalla pantalla-fin" data-pantalla="fin">
+      <h2 class="rotulo-mediano">¡Cuenten sus cartas!</h2>
+      <p class="instruccion">Gana quien tenga menos</p>
+      <div class="desempate">
+        <h3>¿Empate?</h3>
+        <ol>
+          <li>Se dan la espalda.</li>
+          <li>Dan 3 pasos.</li>
+          <li>El squishy se queda en la mesa.</li>
+          <li>El primero que lo agarre y toque al otro gana.</li>
+        </ol>
+      </div>
+      <button class="boton boton-grande" id="btn-otra" type="button">Otra ronda</button>
+    </section>
+  </main>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

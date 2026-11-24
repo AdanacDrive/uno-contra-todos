@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          "creditos.html"
+        ],
+        "createdAt": "2026-11-24T18:57:01.526Z",
+        "reason": "Claude's call: shared shadows are offset dark-purple elevation and sign-painter letter shading, not zero-offset chromatic halos"
+      }
+    ]
+  }
+}
