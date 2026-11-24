@@ -22,7 +22,7 @@
     <section class="pantalla pantalla-inicio" data-pantalla="inicio">
       <h1 class="rotulo"><span>UNO</span><span>contra</span><span>todos</span></h1>
       <p class="indicacion">Pongan el celular en el centro de la mesa y suban el volumen.</p>
-      <button class="boton boton-grande" id="btn-empezar" type="button">Empezar ronda</button>
+      <button class="boton boton-grande" id="btn-empezar" type="button" disabled>Cargando música…</button>
       <div class="pie">
         <label class="enlace" for="archivos">
           <svg class="icono"><use href="#i-nota"/></svg>
@@ -62,6 +62,14 @@
       <svg class="icono-grande"><use href="#i-flecha"/></svg>
       <h2 class="rotulo-mediano">Empieza el ponchado</h2>
       <p class="indicacion">Quien recibió el golpe toma 5 cartas y arranca el turno.</p>
+    </section>
+
+    <!-- Detenido: el celular paró la música (llamada, auriculares, bloqueo) -->
+    <section class="pantalla pantalla-detenido" data-pantalla="detenido" aria-live="assertive">
+      <svg class="icono-grande"><use href="#i-nota"/></svg>
+      <h2 class="rotulo-mediano">La música se detuvo</h2>
+      <p class="indicacion">El celular la pausó. Toquen para seguir donde iban.</p>
+      <button class="boton boton-grande" id="btn-seguir" type="button">Seguir la música</button>
     </section>
 
     <!-- Dado -->

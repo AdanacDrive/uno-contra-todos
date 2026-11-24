@@ -1,4 +1,4 @@
-import { generarPausas } from './pausas.js';
+import { generarPausas, avanzarPausas, SEPARACION_MIN } from './pausas.js';
 import { armarRonda } from './seleccion.js';
 import { tirarDado } from './dado.js';
 
@@ -18,6 +18,8 @@ let ronda = [];
 let indice = 0;
 let plan = null;      // { fin, pausas } de la canción actual
 let siguiente = 0;    // índice de la próxima pausa en plan.pausas
+let finPendiente = false; // la canción terminó mientras el dado estaba abierto
+let pausaPropia = false;  // la última pausa del audio la pidió el juego, no el celular
 let temporizadorPonchado = null;
 let bloqueoPantalla = null;
 
@@ -27,11 +29,15 @@ function mostrar(estado) {
 const estado = () => document.body.dataset.estado;
 
 async function cargarLista() {
+  const boton = $('btn-empezar');
   try {
-    porDefecto = await (await fetch('musica/canciones.json')).json();
+    const respuesta = await fetch('musica/canciones.json');
+    if (!respuesta.ok) throw new Error(respuesta.status);
+    porDefecto = await respuesta.json();
+    boton.disabled = false;
+    boton.textContent = 'Empezar ronda';
   } catch {
-    $('btn-empezar').disabled = true;
-    $('btn-empezar').textContent = 'No cargó la música';
+    boton.textContent = 'No cargó la música';
   }
 }
 
@@ -43,8 +49,22 @@ async function mantenerPantalla() {
   }
 }
 
+// Si el celular no deja sonar (llamada, auriculares, bloqueo), se pide un toque para seguir.
+function reproducir() {
+  audio.play().catch((e) => {
+    if (e.name !== 'AbortError' && estado() === 'sonando') mostrar('detenido');
+  });
+}
+
+function detenerMusica() {
+  if (audio.paused) return;
+  pausaPropia = true;
+  audio.pause();
+}
+
 function empezarRonda() {
   clearTimeout(temporizadorPonchado);
+  finPendiente = false;
   ronda = armarRonda(propias, porDefecto, CANCIONES_POR_RONDA);
   indice = 0;
   mantenerPantalla();
@@ -57,9 +77,10 @@ function iniciarCancion() {
   siguiente = 0;
   $('txt-cancion').textContent = `Canción ${indice + 1} de ${ronda.length}`;
   mostrar('sonando');
+  detenerMusica();
   audio.src = cancion.archivo;
   // play() debe llamarse dentro del toque del usuario la primera vez (bloqueo de audio del navegador).
-  audio.play().catch(() => {});
+  reproducir();
 }
 
 audio.addEventListener('loadedmetadata', () => {
@@ -78,11 +99,23 @@ audio.addEventListener('ended', terminarCancion);
 audio.addEventListener('error', () => {
   if (ronda.length) terminarCancion();
 });
+audio.addEventListener('play', () => {
+  pausaPropia = false;
+});
+audio.addEventListener('pause', () => {
+  if (pausaPropia) {
+    pausaPropia = false;
+    return;
+  }
+  if (estado() === 'sonando') mostrar('detenido');
+});
 
 function revisarPausa(t) {
-  if (plan && siguiente < plan.pausas.length && t >= plan.pausas[siguiente]) {
-    siguiente++;
-    audio.pause();
+  if (!plan) return;
+  const r = avanzarPausas(plan.pausas, siguiente, t, SEPARACION_MIN * ESCALA);
+  siguiente = r.siguiente;
+  if (r.dispara) {
+    detenerMusica();
     navigator.vibrate?.(300);
     mostrar('pausa');
   }
@@ -90,12 +123,18 @@ function revisarPausa(t) {
 
 function terminarCancion() {
   if (estado() === 'fin' || estado() === 'inicio') return;
+  if (estado() === 'dado') {
+    // Que el resultado del dado no desaparezca antes de leerlo.
+    finPendiente = true;
+    detenerMusica();
+    return;
+  }
   plan = null;
   indice++;
   if (indice < ronda.length) {
     iniciarCancion();
   } else {
-    audio.pause();
+    detenerMusica();
     mostrar('fin');
   }
 }
@@ -108,8 +147,14 @@ $('btn-lanzaron').addEventListener('click', () => {
   mostrar('ponchado');
   temporizadorPonchado = setTimeout(() => {
     mostrar('sonando');
-    audio.play().catch(() => {});
+    reproducir();
   }, DURACION_PONCHADO_MS);
+});
+
+$('btn-seguir').addEventListener('click', () => {
+  if (estado() !== 'detenido') return;
+  mostrar('sonando');
+  reproducir();
 });
 
 $('btn-dado').addEventListener('click', () => {
@@ -127,8 +172,15 @@ $('btn-dado').addEventListener('click', () => {
 $('btn-cerrar-dado').addEventListener('click', () => {
   if (estado() !== 'dado') return;
   mostrar('sonando');
-  // Si una pausa tocaba mientras el dado estaba abierto, sale ahora.
-  revisarPausa(audio.currentTime);
+  if (finPendiente) {
+    finPendiente = false;
+    terminarCancion();
+  } else if (audio.paused) {
+    mostrar('detenido');
+  } else {
+    // Si una pausa tocaba mientras el dado estaba abierto, sale ahora.
+    revisarPausa(audio.currentTime);
+  }
 });
 
 $('archivos').addEventListener('change', (e) => {
@@ -144,11 +196,11 @@ $('archivos').addEventListener('change', (e) => {
         : 'Usar mis canciones';
 });
 
-// El navegador suelta el bloqueo de pantalla al cambiar de pestaña; se pide de nuevo al volver.
+// Al volver al juego: se pide de nuevo el bloqueo de pantalla y se revisa si el celular paró la música.
 document.addEventListener('visibilitychange', () => {
-  if (document.visibilityState === 'visible' && estado() !== 'inicio' && bloqueoPantalla?.released !== false) {
-    mantenerPantalla();
-  }
+  if (document.visibilityState !== 'visible' || estado() === 'inicio') return;
+  if (bloqueoPantalla?.released !== false) mantenerPantalla();
+  if (estado() === 'sonando' && audio.paused) mostrar('detenido');
 });
 
 cargarLista();

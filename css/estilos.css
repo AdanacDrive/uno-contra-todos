@@ -2,10 +2,9 @@
   --crema: #fbf1dc;
   --crema-sombra: #efdfbd;
   --morado: #3b1f78;
-  --morado-claro: #5a36a8;
   --amarillo: #ffc81e;
   --cobalto: #1f4fd1;
-  --rojo: #e0322b;
+  --rojo: #c42620;
   --rosa: #ff6fa8;
   --tinta: #24124e;
   --display: "Bungee", "Figtree", system-ui, sans-serif;
@@ -44,6 +43,7 @@ body[data-estado="sonando"] .pantalla-sonando,
 body[data-estado="pausa"] .pantalla-pausa,
 body[data-estado="ponchado"] .pantalla-ponchado,
 body[data-estado="dado"] .pantalla-dado,
+body[data-estado="detenido"] .pantalla-detenido,
 body[data-estado="fin"] .pantalla-fin { display: flex; }
 
 /* Tipografía de rótulo */
@@ -104,10 +104,10 @@ body[data-estado="fin"] .pantalla-fin { display: flex; }
   align-items: center;
   justify-content: center;
   gap: 10px;
-  box-shadow: 0 6px 0 rgb(0 0 0 / .22), 0 14px 22px rgb(20 8 50 / .28);
+  box-shadow: 0 8px 18px rgb(20 8 50 / .3);
   transition: transform .15s var(--salida), box-shadow .15s var(--salida);
 }
-.boton:active { transform: translateY(4px); box-shadow: 0 2px 0 rgb(0 0 0 / .22), 0 6px 12px rgb(20 8 50 / .25); }
+.boton:active { transform: translateY(3px) scale(.98); box-shadow: 0 3px 8px rgb(20 8 50 / .28); }
 .boton:focus-visible, .enlace:focus-visible { outline: 3px solid var(--amarillo); outline-offset: 4px; }
 .boton-grande { background: var(--crema); color: var(--morado); font-family: var(--display); font-weight: 400; font-size: 1.6rem; width: min(100%, 340px); min-height: 84px; margin-top: 10px; }
 .boton-dado { background: var(--rojo); color: #fff; margin-top: 18px; width: min(100%, 320px); }

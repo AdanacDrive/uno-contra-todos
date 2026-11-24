@@ -11,6 +11,24 @@
         ],
         "createdAt": "2026-11-24T18:57:01.526Z",
         "reason": "Claude's call: shared shadows are offset dark-purple elevation and sign-painter letter shading, not zero-offset chromatic halos"
+      },
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-24T20:42:20.123Z",
+        "reason": "Claude's call: shadows are offset sign-painter letter shading and dark-purple elevation, not zero-offset chromatic halos"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-24T20:42:30.434Z",
+        "reason": "Claude's call: .pantalla is a full-screen section with 28px+safe-area padding; static check misreads it"
       }
     ]
   }

@@ -4,7 +4,7 @@ const TRAMO_MIN = 60;
 const TRAMO_EXTRA = 30;
 const MARGEN_INICIO = 8;
 const MARGEN_FINAL = 5;
-const SEPARACION_MIN = 12;
+export const SEPARACION_MIN = 12;
 const INTENTOS = 50;
 
 export function generarPausas(duracionCancion, rng = Math.random) {
@@ -20,4 +20,14 @@ export function generarPausas(duracionCancion, rng = Math.random) {
   }
 
   return { fin, pausas: pausas.sort((a, b) => a - b) };
+}
+
+// Decide si a la altura t toca detener la música. Si se pasaron varias pausas
+// (pantalla bloqueada, dado abierto mucho rato), dispara una sola y descarta las
+// vencidas y las que quedarían a menos de `separacion` segundos.
+export function avanzarPausas(pausas, siguiente, t, separacion = SEPARACION_MIN) {
+  if (siguiente >= pausas.length || t < pausas[siguiente]) return { dispara: false, siguiente };
+  let i = siguiente;
+  while (i < pausas.length && pausas[i] < t + separacion) i++;
+  return { dispara: true, siguiente: i };
 }

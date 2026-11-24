@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { generarPausas } from '../js/pausas.js';
+import { generarPausas, avanzarPausas } from '../js/pausas.js';
 import { rngConSemilla } from './util.js';
 
 function revisarPausas({ fin, pausas }) {
@@ -29,4 +29,14 @@ test('una canción de 45 s se recorta a su duración y respeta los márgenes', (
     assert.ok(r.pausas.length >= 1, 'sin pausas');
     revisarPausas(r);
   }
+});
+
+test('avanzarPausas salta todas las pausas vencidas y las que caen a menos de 12 s', () => {
+  const pausas = [10, 25, 40, 70];
+  assert.deepEqual(avanzarPausas(pausas, 0, 5), { dispara: false, siguiente: 0 });
+  assert.deepEqual(avanzarPausas(pausas, 0, 10.2), { dispara: true, siguiente: 1 });
+  // El dado o el bloqueo dejaron pasar 10 y 25: una sola pausa, y la de 40 (a 9 s) también se descarta.
+  assert.deepEqual(avanzarPausas(pausas, 0, 31), { dispara: true, siguiente: 3 });
+  assert.deepEqual(avanzarPausas(pausas, 3, 80), { dispara: true, siguiente: 4 });
+  assert.deepEqual(avanzarPausas(pausas, 4, 90), { dispara: false, siguiente: 4 });
 });
